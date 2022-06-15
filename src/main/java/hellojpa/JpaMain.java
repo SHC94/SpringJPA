@@ -50,6 +50,7 @@ public class JpaMain {
                     .getResultList();
 //            대상이 객체. 객체 지향 쿼리
 //            DB의 방언에 맞게 번역
+            //push
 
 
             for(Member member : result) {
