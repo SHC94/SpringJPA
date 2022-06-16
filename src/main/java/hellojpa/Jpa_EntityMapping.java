@@ -15,12 +15,12 @@ public class Jpa_EntityMapping {
 
         try {
             System.out.println("================================");
-            Member member = new Member();
+//            Member member = new Member();
 //            member.setId("shc");
-            member.setUsername("SHC2");
-            member.setRoleType(RoleType.ADMIN);
+//            member.setUsername("SHC2");
+//            member.setRoleType(RoleType.ADMIN);
+//            em.persist(member);
 
-            em.persist(member);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();

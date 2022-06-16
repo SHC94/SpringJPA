@@ -16,7 +16,7 @@
             <property name="hibernate.format_sql" value="true"/>        <!--sql 정렬-->
             <property name="hibernate.use_sql_comments" value="true"/>  <!--sql 실행 주석-->
             <property name="hibernate.jdbc.batch_size" value="10"/>
-            <property name="hibernate.hbm2ddl.auto" value="create" />   <!--데이터베이스 스키마 자동 생성 - 주의-->
+            <property name="hibernate.hbm2ddl.auto" value="none" />   <!--데이터베이스 스키마 자동 생성 - 주의-->
         </properties>
     </persistence-unit>
 </persistence>

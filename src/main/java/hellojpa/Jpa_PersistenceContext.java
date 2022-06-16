@@ -23,24 +23,24 @@ public class Jpa_PersistenceContext {
 //            회원 등록
 
 //            비영속
-            Member member = new Member();
+//            Member member = new Member();
 //            member.setId(100L);
-            member.setUsername("HelloJPA");
+//            member.setUsername("HelloJPA");
 
-            Member memberB = new Member();
+//            Member memberB = new Member();
 //            member.setId(101L);
-            member.setUsername("HelloJPA2");
+//            member.setUsername("HelloJPA2");
 
 //            영속
-            em.persist(member);
-            em.persist(memberB);
+//            em.persist(member);
+//            em.persist(memberB);
             //여기까지 Insert SQL을 데이터베이스에 보내지 않는다.
 
-            Member findMember1 = em.find(Member.class, 100L);   //DB 조회 > 영속성 컨텍스트(1차 캐시)   : 쿼리 O
-            Member findMember2 = em.find(Member.class, 100L);   //영속성 컨텍스트(1차 캐시) 조회        : 쿼리 X
+//            Member findMember1 = em.find(Member.class, 100L);   //DB 조회 > 영속성 컨텍스트(1차 캐시)   : 쿼리 O
+//            Member findMember2 = em.find(Member.class, 100L);   //영속성 컨텍스트(1차 캐시) 조회        : 쿼리 X
 
 //            동일성 보장
-            System.out.println(findMember1 == findMember2);
+//            System.out.println(findMember1 == findMember2);
 
             //커밋하는 순간 데이터베이스에 Insert SQL을 보낸다.
             tx.commit();
