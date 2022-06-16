@@ -3,7 +3,7 @@ package hellojpa;
 import javax.persistence.*;
 import java.util.List;
 
-public class Jpa_start {
+public class Jpa_Start {
 
     public static void main(String[] args) {
         System.out.println("start");
@@ -20,14 +20,14 @@ public class Jpa_start {
         try {
 //            회원 등록
             Member member = new Member();
-            member.setId(101L);
-            member.setName("HelloJPA2");
+//            member.setId(101L);
+            member.setUsername("HelloJPA2");
             em.persist(member);
 
 //            회원 조회
             Member findMember = em.find(Member.class, 1L);
             System.out.println("findMember ID = " + findMember.getId());
-            System.out.println("findMember NAME = " + findMember.getName());
+            System.out.println("findMember NAME = " + findMember.getUsername());
 
 //            회원 삭제
 //            Member removeMember = new Member();
@@ -36,7 +36,7 @@ public class Jpa_start {
 //            회원 수정
 //            Member findMember = em.find(Member.class, 1L);
             em.detach(findMember);
-            findMember.setName("HelloJPA100");
+            findMember.setUsername("HelloJPA100");
             /*
             JPA를 통해 값을 가져오면 JPA가 데이터를 관리하기 시작.
             JPA가 변경 여부를 트랜잭션 커밋 시점에 체크
@@ -53,7 +53,7 @@ public class Jpa_start {
 
 
             for(Member loopMember : result) {
-                System.out.println(loopMember.getId() + " / " + loopMember.getName());
+                System.out.println(loopMember.getId() + " / " + loopMember.getUsername());
             }//end for()
 
             tx.commit();

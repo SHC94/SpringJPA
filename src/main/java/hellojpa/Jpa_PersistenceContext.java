@@ -24,12 +24,12 @@ public class Jpa_PersistenceContext {
 
 //            비영속
             Member member = new Member();
-            member.setId(100L);
-            member.setName("HelloJPA");
+//            member.setId(100L);
+            member.setUsername("HelloJPA");
 
             Member memberB = new Member();
-            member.setId(101L);
-            member.setName("HelloJPA2");
+//            member.setId(101L);
+            member.setUsername("HelloJPA2");
 
 //            영속
             em.persist(member);
