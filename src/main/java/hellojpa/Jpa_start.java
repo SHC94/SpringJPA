@@ -1,11 +1,9 @@
 package hellojpa;
 
-import org.hibernate.annotations.common.reflection.XMember;
-
 import javax.persistence.*;
 import java.util.List;
 
-public class JpaMain {
+public class Jpa_start {
 
     public static void main(String[] args) {
         System.out.println("start");
@@ -21,15 +19,15 @@ public class JpaMain {
 
         try {
 //            회원 등록
-//            Member member = new Member();
-//            member.setId(2L);
-//            member.setName("HelloB");
-//            em.persist(member);
+            Member member = new Member();
+            member.setId(101L);
+            member.setName("HelloJPA2");
+            em.persist(member);
 
 //            회원 조회
-//            Member findMember = em.find(Member.class, 1L);
-//            System.out.println("findMember ID = " + findMember.getId());
-//            System.out.println("findMember NAME = " + findMember.getName());
+            Member findMember = em.find(Member.class, 1L);
+            System.out.println("findMember ID = " + findMember.getId());
+            System.out.println("findMember NAME = " + findMember.getName());
 
 //            회원 삭제
 //            Member removeMember = new Member();
@@ -37,7 +35,8 @@ public class JpaMain {
 
 //            회원 수정
 //            Member findMember = em.find(Member.class, 1L);
-//            findMember.setName("HelloJPA");
+            em.detach(findMember);
+            findMember.setName("HelloJPA100");
             /*
             JPA를 통해 값을 가져오면 JPA가 데이터를 관리하기 시작.
             JPA가 변경 여부를 트랜잭션 커밋 시점에 체크
@@ -48,13 +47,13 @@ public class JpaMain {
                     .setFirstResult(1)
                     .setMaxResults(10)
                     .getResultList();
-//            대상이 객체. 객체 지향 쿼리
-//            DB의 방언에 맞게 번역
+            //대상이 객체. 객체 지향 쿼리
+            //DB의 방언에 맞게 번역
             //push
 
 
-            for(Member member : result) {
-                System.out.println(member.getId() + " / " + member.getName());
+            for(Member loopMember : result) {
+                System.out.println(loopMember.getId() + " / " + loopMember.getName());
             }//end for()
 
             tx.commit();
