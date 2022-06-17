@@ -69,43 +69,16 @@ public class Jpa_Start {
             member.setTeam(team);
             em.persist(member);
 
-            em.flush();
-            em.clear();
+//            team.addMember(member);
+//            em.flush();
+//            em.clear();
 
-            Member2 findMember = em.find(Member2.class, member.getId());
-            List<Member2> members = findMember.getTeam().getMembers();
+            Team findTeam = em.find(Team.class, team.getId());
+            List<Member2> members = findTeam.getMembers();
 
-            for(Member2 m : members) {
-                System.out.println(m.getId() + " / " + m.getUsername() + " / " + m.getTeam().getId());
-            }//end for()
-
-            System.out.println("====================================");
-
-
-//            진짜 매핑이 있는 곳에 데이터 넣기
-//            team.setName("신형철 팀");
-//            em.persist(team);
-//
-//            Member2 memberTest = new Member2();
-//            memberTest.setUsername("신형철 멤버");
-//            memberTest.setTeam(team);
-//            em.persist(memberTest);
-
-
-            Team team123 = em.find(Team.class, 1L);
-//            가짜 매핑이 있는 곳에 데이터 넣기
-//            Member2 testMember = new Member2();
-//            testMember.setUsername("연관관계의 주인을 찾아보자");
-//            testMember.setTeam(team);
-//            List<Member2> zzmemberList = new ArrayList<>();
-//            zzmemberList.add(testMember);
-//            team123.setMembers(zzmemberList);
-
-            for (Member2 team123Member : team123.getMembers()) {
-                System.out.println(team123Member.getId() + " / " + team123Member.getUsername());
+            for (Member2 m : members) {
+                System.out.println(m.getUsername());
             }
-
-
             tx.commit();
         } catch (Exception e) {
             tx.rollback();

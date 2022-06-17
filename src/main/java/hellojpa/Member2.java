@@ -50,5 +50,6 @@ public class Member2 {
 
     public void setTeam(Team team) {
         this.team = team;
+        team.getMembers().add(this);    //연관관계 편의 메서드
     }
 }
