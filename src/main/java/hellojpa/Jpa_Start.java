@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
 
 public class Jpa_Start {
 
@@ -21,64 +20,20 @@ public class Jpa_Start {
         tx.begin();
 
         try {
-//            회원 등록
-//            Member member = new Member();
-//            member.setId(101L);
-//            member.setUsername("HelloJPA2");
-//            em.persist(member);
+            Movie movie = new Movie();
+            movie.setDirector("신형철");
+            movie.setActor("형철");
+            movie.setName("형철따리형철따");
+            movie.setPrice(20000);
 
-//            회원 조회
-//            Member findMember = em.find(Member.class, 1L);
-//            System.out.println("findMember ID = " + findMember.getId());
-//            System.out.println("findMember NAME = " + findMember.getUsername());
+            em.persist(movie);
 
-//            회원 삭제
-//            Member removeMember = new Member();
-//            em.remove(removeMember);
+            em.flush();
+            em.clear();
 
-//            회원 수정
-//            Member findMember = em.find(Member.class, 1L);
-//            em.detach(findMember);
-//            findMember.setUsername("HelloJPA100");
-            /*
-            JPA를 통해 값을 가져오면 JPA가 데이터를 관리하기 시작.
-            JPA가 변경 여부를 트랜잭션 커밋 시점에 체크
-            */
+            Movie findmove = em.find(Movie.class, movie.getId());
+            System.out.println("findmove = " + findmove);
 
-            /*JPQL*/
-//            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-//                    .setFirstResult(1)
-//                    .setMaxResults(10)
-//                    .getResultList();
-            //대상이 객체. 객체 지향 쿼리
-            //DB의 방언에 맞게 번역
-            //push
-
-
-//            for(Member loopMember : result) {
-//                System.out.println(loopMember.getId() + " / " + loopMember.getUsername());
-//            }//end for()
-
-            //저장
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
-
-            Member2 member = new Member2();
-            member.setUsername("member1");
-            member.setTeam(team);
-            em.persist(member);
-
-//            team.addMember(member);
-//            em.flush();
-//            em.clear();
-
-            Team findTeam = em.find(Team.class, team.getId());
-            List<Member2> members = findTeam.getMembers();
-
-            for (Member2 m : members) {
-                System.out.println(m.getUsername());
-            }
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
