@@ -1,10 +1,9 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-public class Member2 extends BaseEntity {
+public class Member extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "MEMBER_ID")
@@ -18,7 +17,7 @@ public class Member2 extends BaseEntity {
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
-    public Member2() {
+    public Member() {
     }
 
     public Long getId() {
@@ -53,4 +52,5 @@ public class Member2 extends BaseEntity {
         this.team = team;
         team.getMembers().add(this);    //연관관계 편의 메서드
     }
+
 }

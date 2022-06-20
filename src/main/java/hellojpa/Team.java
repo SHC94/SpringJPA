@@ -14,7 +14,7 @@ public class Team extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "team")
-    private List<Member2> members = new ArrayList<>();
+    private List<Member> members = new ArrayList<>();
 
     public Team() {
     }
@@ -35,11 +35,11 @@ public class Team extends BaseEntity {
         this.name = name;
     }
 
-    public List<Member2> getMembers() {
+    public List<Member> getMembers() {
         return members;
     }
 
-    public void setMembers(List<Member2> members) {
+    public void setMembers(List<Member> members) {
         this.members = members;
     }
 
