@@ -1,12 +1,10 @@
 package hellojpa;
 
-import org.hibernate.Hibernate;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.time.LocalDateTime;
+import java.util.List;
 
 public class Jpa_Start {
 
@@ -23,17 +21,6 @@ public class Jpa_Start {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setUsername("신형철");
-            member.setCreatedBy("hcshin2");
-            member.setCreateDate(LocalDateTime.now());
-            member.setLastModifiedBy("hcshin2");
-            member.setLastModifiedDate(LocalDateTime.now());
-
-            em.persist(member);
-
-            em.flush();
-            em.clear();
 
             //하이버네이트가 만든 가짜 프록시 클래스
             //하이버네이트 내 라이브러리를 활용
@@ -42,16 +29,48 @@ public class Jpa_Start {
 //            System.out.println("findMember = " + findMember.getId());
 //            System.out.println("findMember = " + findMember.getUsername());
 
-            Member refMember = em.getReference(Member.class, member.getId());
-            System.out.println("m1 = " + refMember.getClass());
-            
-            Member findMember = em.find(Member.class, member.getId());
-            System.out.println("findMember = " + findMember.getClass());
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
 
-            System.out.println("a == a : " + (refMember == findMember));    //항상 true
+            Team teamB = new Team();
+            teamB.setName("teamB");
+            em.persist(teamB);
 
-            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));   //프록시 인스턴스의 초기화 여부 확인
-            Hibernate.initialize(refMember);    //강제 초기화
+            Member member1 = new Member();
+            member1.setUsername("신형철");
+            member1.setTeam(team);
+            em.persist(member1);
+
+            Member member2 = new Member();
+            member2.setUsername("신형철");
+            member2.setTeam(teamB);
+            em.persist(member2);
+
+            em.flush();
+            em.clear();
+
+//            Member m = em.find(Member.class, member1.getId());
+//            System.out.println(m.getTeam().getClass());
+
+//            LAZY 지연로딩
+//            EAGER 즉시로딩
+//            System.out.println("================");
+//            System.out.println(m.getTeam().getName());
+//            System.out.println("================");
+
+            //즉시 로딩 N+1 문제 (최초 쿼리 1, 추가 쿼리 N)
+            List<Member> members = em.createQuery("select m from Member m", Member.class)
+                            .getResultList();
+
+            for(Member m : members) {
+                System.out.println(m.getId() + " / " + m.getUsername());
+            }
+            //SQL 로 번역 : SELECT * FROM MEMBER;
+            //SQL : SELECT * FROM TEAM WHERE TEAM_ID = MEMBER.TEAM_ID
+
+
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
