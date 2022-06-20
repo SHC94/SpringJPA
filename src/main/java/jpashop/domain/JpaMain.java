@@ -20,7 +20,14 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Order order = new Order();
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("신형철");
+
+            em.flush();
+            em.clear();
+
+            em.persist(book);
 
             tx.commit();
         } catch (Exception e) {
