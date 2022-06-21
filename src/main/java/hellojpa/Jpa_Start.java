@@ -52,7 +52,7 @@ public class Jpa_Start {
 //            Member m = em.find(Member.class, member1.getId());
 //            System.out.println(m.getTeam().getClass());
 //
-//            LAZY 지연로딩
+//            setUsername 지연로딩
 //            EAGER 즉시로딩
 //            System.out.println("================");
 //            System.out.println(m.getTeam().getName());
